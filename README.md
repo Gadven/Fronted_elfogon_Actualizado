@@ -1,8 +1,10 @@
-# Frontend para Aplicación Web Constructora
+# Frontend El Fogón - Actualizado
+
+**GRUPO-4**
 
 Proyecto generado usando [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
-Frontend para la aplicación web de una biblioteca, el backend está desarrollado el SrpingBoot.
-Este proyecto es desarrollado como parte del curso <b>Soluciones Web y Aplicaciones Distribuidas</b> con <b>NRC 3423</b>, correspondiente al <b>período UPN 2025-2<b>
+Frontend para la aplicación web de El Fogón, el backend está desarrollado en SpringBoot.
+Este proyecto es desarrollado como parte del curso **Soluciones Web y Aplicaciones Distribuidas** con **NRC 3423**, correspondiente al **período UPN 2025-2**
 
 ## Development server
 
@@ -102,5 +104,4 @@ Instalar auth0/angular-jwt. Esta libreria ayuda, tiene utilitarios para ver si e
 
 ```bash
 npm install @auth0/angular-jwt
-
 ```
