@@ -1,0 +1,82 @@
+<div class="menu-container">
+  <!-- Header del Menú -->
+  <div class="menu-header">
+    <h1>Menú El Fogón</h1>
+    <p class="subtitle">Descubre nuestros deliciosos platos</p>
+  </div>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar platos...</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (keyup.enter)="searchProducts()" placeholder="Ej: pollo, ensalada...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Filtros por categoría -->
+  <div class="category-filters">
+    <mat-chip-listbox>
+      <mat-chip-option [selected]="selectedCategory === 0" (click)="filterByCategory(0)">
+        Todos
+      </mat-chip-option>
+      <mat-chip-option 
+        *ngFor="let category of categories" 
+        [selected]="selectedCategory === category.idCategory"
+        (click)="filterByCategory(category.idCategory)">
+        {{category.name}}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Cargando menú...</p>
+  </div>
+
+  <!-- Grid de productos -->
+  <div *ngIf="!loading && filteredProducts.length > 0" class="products-grid">
+    <mat-card *ngFor="let product of filteredProducts" class="product-card">
+      <!-- Imagen del producto -->
+      <div class="product-image">
+        <img [src]="product.imageUrl || '/assets/default-food.jpg'" 
+             [alt]="product.name"
+             onerror="this.src='/assets/default-food.jpg'">
+      </div>
+
+      <!-- Contenido del producto -->
+      <mat-card-content>
+        <div class="product-info">
+          <h3 class="product-name">{{product.name}}</h3>
+          <p class="product-description">{{product.description}}</p>
+          <div class="product-details">
+            <span class="product-price">{{formatPrice(product.price)}}</span>
+            <span *ngIf="product.preparationTime" class="preparation-time">
+              <mat-icon>schedule</mat-icon>
+              {{product.preparationTime}} min
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <!-- Acciones -->
+      <mat-card-actions class="product-actions">
+        <button mat-raised-button color="primary" (click)="addToCart(product)">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Agregar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- No hay productos -->
+  <div *ngIf="!loading && filteredProducts.length === 0" class="no-products">
+    <mat-icon class="no-products-icon">restaurant_menu</mat-icon>
+    <h2>No se encontraron platos</h2>
+    <p>Intenta con otra búsqueda o categoría</p>
+    <button mat-raised-button color="primary" (click)="searchQuery = ''; filterByCategory(0)">
+      Ver todo el menú
+    </button>
+  </div>
+</div>
