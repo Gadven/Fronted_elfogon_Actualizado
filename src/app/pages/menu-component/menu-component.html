@@ -16,17 +16,17 @@
 
   <!-- Filtros por categoría -->
   <div class="category-filters">
-    <mat-chip-listbox>
-      <mat-chip-option [selected]="selectedCategory === 0" (click)="filterByCategory(0)">
+    <mat-chip-set>
+      <mat-chip [class.selected]="selectedCategory === 0" (click)="filterByCategory(0)">
         Todos
-      </mat-chip-option>
-      <mat-chip-option 
+      </mat-chip>
+      <mat-chip 
         *ngFor="let category of categories" 
-        [selected]="selectedCategory === category.idCategory"
+        [class.selected]="selectedCategory === category.idCategory"
         (click)="filterByCategory(category.idCategory)">
         {{category.name}}
-      </mat-chip-option>
-    </mat-chip-listbox>
+      </mat-chip>
+    </mat-chip-set>
   </div>
 
   <!-- Loading spinner -->

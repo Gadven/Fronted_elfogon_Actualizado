@@ -10,7 +10,8 @@ export interface CartItem {
 export interface Cart {
   items: CartItem[];
   totalItems: number;
-  totalPrice: number;
+  subtotal: number;
+  total: number;
 }
 
 export interface Order {

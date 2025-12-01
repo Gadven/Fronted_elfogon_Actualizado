@@ -87,11 +87,11 @@
         </mat-form-field>
 
         <div class="button-group">
-            <button mat-raised-button color="primary" (click)="operate()" type="button">
+            <button mat-raised-button class="primary-btn" (click)="operate()" type="button">
                 <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
                 {{ isEdit ? 'Guardar Cambios' : 'Crear Empleado' }}
             </button>
-            <button mat-raised-button routerLink="/pages/patient" type="button">
+            <button mat-raised-button class="cancel-btn" routerLink="/pages/patient" type="button">
                 <mat-icon>cancel</mat-icon>
                 Cancelar
             </button>

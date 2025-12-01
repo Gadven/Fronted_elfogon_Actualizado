@@ -40,11 +40,11 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="dialog-actions">
-    <button mat-raised-button color="primary" (click)="operate()">
+    <button mat-raised-button class="primary-btn" (click)="operate()">
         <mat-icon>{{ supplier.idSupplier ? 'save' : 'add' }}</mat-icon>
         {{ supplier.idSupplier ? 'Guardar Cambios' : 'Crear Proveedor' }}
     </button>
-    <button mat-raised-button (click)="close()">
+    <button mat-raised-button class="cancel-btn" (click)="close()">
         <mat-icon>cancel</mat-icon>
         Cancelar
     </button>

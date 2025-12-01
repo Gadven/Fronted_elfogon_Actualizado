@@ -36,37 +36,87 @@ export class MenuComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.productService.getCategories().subscribe({
-      next: (data) => {
-        this.categories = data;
-      },
-      error: (err) => {
-        console.error('Error loading categories:', err);
-        this.snackBar.open('Error al cargar las categorías', 'Cerrar', {
-          duration: 3000,
-          panelClass: ['error-snackbar']
-        });
-      }
-    });
+    // Datos de prueba para categorías
+    this.categories = [
+      { idCategory: 1, name: 'Platos Principales', description: 'Comida contundente' },
+      { idCategory: 2, name: 'Entradas', description: 'Aperitivos y entradas' },
+      { idCategory: 3, name: 'Bebidas', description: 'Refrescos y jugos' },
+      { idCategory: 4, name: 'Postres', description: 'Dulces y postres' }
+    ];
   }
 
   loadProducts(): void {
     this.loading = true;
-    this.productService.getAvailableProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-        this.filteredProducts = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error loading products:', err);
-        this.snackBar.open('Error al cargar el menú', 'Cerrar', {
-          duration: 3000,
-          panelClass: ['error-snackbar']
-        });
-        this.loading = false;
-      }
-    });
+    
+    // Simular una pequeña carga
+    setTimeout(() => {
+      // Datos de prueba para productos
+      this.products = [
+        {
+          idProduct: 1,
+          name: 'Pollo a la Brasa',
+          description: 'Delicioso pollo a la brasa con papas fritas y ensalada',
+          price: 25.00,
+          category: 'Platos Principales',
+          imageUrl: '/Choclo tierno con queso.jpg',
+          available: true,
+          preparationTime: 25
+        },
+        {
+          idProduct: 2,
+          name: 'Ceviche Mixto',
+          description: 'Fresco ceviche de pescado y mariscos con camote y choclo',
+          price: 30.00,
+          category: 'Platos Principales',
+          imageUrl: '/Humitas.png',
+          available: true,
+          preparationTime: 15
+        },
+        {
+          idProduct: 3,
+          name: 'Choclo con Queso',
+          description: 'Choclo tierno acompañado con queso fresco',
+          price: 8.00,
+          category: 'Entradas',
+          imageUrl: '/Choclo tierno con queso.jpg',
+          available: true,
+          preparationTime: 10
+        },
+        {
+          idProduct: 4,
+          name: 'Humitas',
+          description: 'Humitas caseras envueltas en chala de choclo',
+          price: 6.00,
+          category: 'Entradas',
+          imageUrl: '/Humitas.png',
+          available: true,
+          preparationTime: 8
+        },
+        {
+          idProduct: 5,
+          name: 'Inca Kola',
+          description: 'La bebida del sabor nacional',
+          price: 5.00,
+          category: 'Bebidas',
+          imageUrl: '/El_fogon.jpg',
+          available: true,
+          preparationTime: 2
+        },
+        {
+          idProduct: 6,
+          name: 'Yuyo en Crema',
+          description: 'Tradicional yuyo preparado en crema',
+          price: 18.00,
+          category: 'Platos Principales',
+          imageUrl: '/Yuyo en Crema.jpg',
+          available: true,
+          preparationTime: 20
+        }
+      ];
+      
+      this.filteredProducts = this.products;
+      this.loading = false;
+    }, 1000);
   }
 
   filterByCategory(categoryId: number): void {

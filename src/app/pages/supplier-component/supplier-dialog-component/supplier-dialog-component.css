@@ -5,7 +5,7 @@
 }
 
 .dialog-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
     color: white;
     padding: 20px 24px;
     margin: 0;
@@ -55,7 +55,7 @@ mat-form-field {
 
 mat-icon[matPrefix] {
     margin-right: 8px;
-    color: #667eea;
+    color: #f39c12;
 }
 
 .dialog-actions {
@@ -77,7 +77,7 @@ mat-icon[matPrefix] {
 }
 
 button[color="primary"] {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
 }
 
 button[color="primary"]:hover {
@@ -90,4 +90,15 @@ input[matInput] {
 
 input[matInput]:focus {
     outline: none;
+}
+
+/* Estilos para botones personalizados */
+.primary-btn {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
+    color: white !important;
+}
+
+.cancel-btn {
+    background: #6c757d !important;
+    color: white !important;
 }

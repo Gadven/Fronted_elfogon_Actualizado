@@ -1,35 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GenericService } from './generic-service';
+import { Observable, of } from 'rxjs';
 import { Order } from '../model/order';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService extends GenericService<Order> {
+export class OrderService {
 
-  constructor() {
-    super('/orders');
-  }
+  constructor() {}
 
-  // Métodos específicos para pedidos
+  // Métodos que devuelven datos de prueba
   createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.url, order);
+    return of({ ...order, idOrder: 1 });
   }
 
   getOrdersByStatus(status: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.url}/status/${status}`);
+    return of([]);
   }
 
   updateOrderStatus(orderId: number, status: string): Observable<Order> {
-    return this.http.patch<Order>(`${this.url}/${orderId}/status`, { status });
+    return of({} as Order);
   }
 
   getOrdersByDate(date: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.url}/date/${date}`);
+    return of([]);
   }
 
   getOrdersByCustomerPhone(phone: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.url}/customer/${phone}`);
+    return of([]);
   }
 }

@@ -10,7 +10,8 @@ export class CartService {
   private cart: Cart = {
     items: [],
     totalItems: 0,
-    totalPrice: 0
+    subtotal: 0,
+    total: 0
   };
 
   private cartSubject = new BehaviorSubject<Cart>(this.cart);
@@ -71,7 +72,8 @@ export class CartService {
     this.cart = {
       items: [],
       totalItems: 0,
-      totalPrice: 0
+      subtotal: 0,
+      total: 0
     };
     this.updateCartTotals();
   }
@@ -82,7 +84,8 @@ export class CartService {
 
   private updateCartTotals(): void {
     this.cart.totalItems = this.cart.items.reduce((total, item) => total + item.quantity, 0);
-    this.cart.totalPrice = this.cart.items.reduce((total, item) => total + item.subtotal, 0);
+    this.cart.subtotal = this.cart.items.reduce((total, item) => total + item.subtotal, 0);
+    this.cart.total = this.cart.subtotal;
     
     this.cartSubject.next({ ...this.cart });
     this.saveCartToStorage();

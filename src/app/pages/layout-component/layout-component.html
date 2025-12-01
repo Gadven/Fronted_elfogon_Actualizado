@@ -8,7 +8,10 @@
             }
         </button>
 
-        <span>El Fogón</span>
+        <div class="logo-container">
+            <img src="/El_fogon.jpg" alt="El Fogón Logo" class="logo-circular">
+            <span>El Fogón</span>
+        </div>
 
         <span class="example-spacer"></span>
 
@@ -31,19 +34,22 @@
     <mat-sidenav-container class="example-sidenav-container">
         <mat-sidenav #sidenav style="width: 250px" mode="push">
 
-            <img src="/El_fogon.jpg" width="128" style="margin-left: 20px" alt="El Fogón" />
+            <div class="sidenav-header">
+                <img src="/El_fogon.jpg" class="sidenav-logo" alt="El Fogón" />
+                <h3 class="sidenav-title">El Fogón</h3>
+            </div>
 
             <mat-divider></mat-divider>
 
             <!-- Sistema de Pedidos -->
             <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/menu" style="cursor: pointer">
                 <mat-icon>restaurant_menu</mat-icon>
-                <span>Menú</span>
+                <span>Ver Menú</span>
             </button>
 
-            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/cart" style="cursor: pointer">
-                <mat-icon>shopping_cart</mat-icon>
-                <span>Carrito</span>
+            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/dish-management" style="cursor: pointer">
+                <mat-icon>restaurant</mat-icon>
+                <span>Gestión de Platos</span>
             </button>
 
             <mat-divider></mat-divider>

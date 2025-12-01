@@ -1,0 +1,149 @@
+<div class="dish-management-container">
+  <!-- Header Profesional -->
+  <div class="header-section">
+    <div class="header-content">
+      <div class="title-area">
+        <div class="title-icon">
+          <mat-icon>restaurant_menu</mat-icon>
+        </div>
+        <div class="title-text">
+          <h1>Gestión de Platos</h1>
+          <p class="subtitle">Administra el menú de El Fogón</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="stats-summary">
+          <div class="stat-item">
+            <span class="stat-number">{{dishes.length}}</span>
+            <span class="stat-label">Total</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{filteredDishes.length}}</span>
+            <span class="stat-label">Mostrados</span>
+          </div>
+        </div>
+        <button class="elegant-btn add-dish-btn" (click)="addDish()">
+          <mat-icon>add_circle</mat-icon>
+          <span>Nuevo Plato</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel de Control Elegante -->
+  <div class="control-panel">
+    <div class="search-section">
+      <div class="search-container">
+        <input 
+          class="elegant-search" 
+          [(ngModel)]="searchTerm" 
+          (ngModelChange)="onSearchChange()"
+          placeholder="Buscar por nombre, descripción o ingredientes..."
+          type="text">
+        <mat-icon class="search-icon">search</mat-icon>
+        <button *ngIf="searchTerm" class="clear-search-elegant" (click)="searchTerm=''; onSearchChange()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    
+    <div class="categories-section">
+      <div class="categories-label">Categorías</div>
+      <div class="category-pills">
+        <button 
+          class="category-pill" 
+          [class.active]="selectedCategory === ''"
+          (click)="selectedCategory=''; onCategoryChange()">
+          <mat-icon>apps</mat-icon>
+          Todas
+        </button>
+        <button 
+          *ngFor="let category of categories" 
+          class="category-pill" 
+          [class.active]="selectedCategory === category"
+          (click)="selectedCategory=category; onCategoryChange()">
+          <mat-icon>{{getCategoryIcon(category)}}</mat-icon>
+          {{category}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de Platos Elegante -->
+  <div class="dishes-grid">
+    <div *ngFor="let dish of filteredDishes" class="elegant-dish-card">
+      <!-- Contenedor de Imagen Elegante -->
+      <div class="elegant-image-container">
+        <img [src]="getImageUrl(dish.imageUrl)" 
+             [alt]="dish.name"
+             class="elegant-dish-image"
+             (error)="$event.target.src='assets/default-dish.svg'">
+        <div class="image-overlay"></div>
+        
+        <!-- Badge de Estado -->
+        <div class="status-badge" 
+             [class.status-available]="dish.available"
+             [class.status-unavailable]="!dish.available">
+          {{ dish.available ? 'Disponible' : 'No Disponible' }}
+        </div>
+      </div>
+
+      <!-- Contenido Elegante -->
+      <div class="elegant-card-content">
+        <div class="elegant-dish-header">
+          <div class="dish-title-section">
+            <h3>{{ dish.name }}</h3>
+          </div>
+          <div class="elegant-category-badge">
+            {{ dish.category }}
+          </div>
+        </div>
+        
+        <p class="elegant-description">{{ dish.description }}</p>
+        
+        <div class="dish-details">
+          <div class="elegant-price">S/{{ dish.price.toFixed(2) }}</div>
+          <div class="dish-meta">
+            <span>ID: #{{ dish.id.toString().padStart(3, '0') }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Acciones Sofisticado -->
+      <div class="elegant-actions">
+        <div class="action-group">
+          <button class="sophisticated-btn btn-edit" (click)="editDish(dish)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          
+          <button class="sophisticated-btn btn-toggle" 
+                  [class.active]="dish.available"
+                  (click)="toggleAvailability(dish)">
+            <mat-icon>{{ dish.available ? 'visibility' : 'visibility_off' }}</mat-icon>
+            <span>{{ dish.available ? 'Activo' : 'Inactivo' }}</span>
+          </button>
+        </div>
+        
+        <button class="sophisticated-btn btn-delete" (click)="deleteDish(dish)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado Vacío Elegante -->
+  <div *ngIf="filteredDishes.length === 0" class="elegant-empty-state">
+    <div class="empty-icon">
+      <mat-icon>restaurant_menu</mat-icon>
+    </div>
+    <h2 class="empty-title">No se encontraron platos</h2>
+    <p class="empty-subtitle">
+      {{ searchTerm || selectedCategory ? 'Ajusta los filtros para ver más resultados o agrega un nuevo plato para comenzar.' : 'Comienza agregando tu primer plato al menú.' }}
+    </p>
+    <button class="empty-action" (click)="addDish()">
+      <mat-icon>add_circle</mat-icon>
+      <span>Agregar Primer Plato</span>
+    </button>
+  </div>
+</div>

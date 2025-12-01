@@ -19,7 +19,8 @@ export class CartComponent implements OnInit, OnDestroy {
   cart: Cart = {
     items: [],
     totalItems: 0,
-    totalPrice: 0
+    subtotal: 0,
+    total: 0
   };
   
   private cartSubscription?: Subscription;

@@ -1,0 +1,195 @@
+<div class="elegant-dialog-container">
+  <!-- Header Profesional -->
+  <div class="professional-header">
+    <div class="header-icon">
+      <mat-icon>{{ isEdit ? 'edit_note' : 'add_circle' }}</mat-icon>
+    </div>
+    <div class="header-text">
+      <h2 class="dialog-title">{{ isEdit ? 'Editar Plato' : 'Agregar Nuevo Plato' }}</h2>
+      <p class="dialog-subtitle">{{ isEdit ? 'Modifica la información del plato' : 'Completa los detalles del nuevo plato' }}</p>
+    </div>
+  </div>
+
+  <mat-dialog-content class="elegant-content">
+    <form class="professional-form">
+      
+      <!-- Sección de Información Principal -->
+      <div class="elegant-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>info</mat-icon>
+          </div>
+          <h3 class="section-title">Información del Plato</h3>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label class="elegant-label">Nombre del Plato *</label>
+            <div class="input-container">
+              <mat-icon class="input-icon">restaurant</mat-icon>
+              <input class="elegant-input" 
+                     [(ngModel)]="dish.name" 
+                     name="name"
+                     placeholder="Ej: Pollo a la Brasa Especial"
+                     required>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="elegant-label">Descripción *</label>
+            <div class="textarea-container">
+              <mat-icon class="textarea-icon">description</mat-icon>
+              <textarea class="elegant-textarea" 
+                        [(ngModel)]="dish.description" 
+                        name="description"
+                        placeholder="Describe el plato, ingredientes principales, método de preparación y características especiales..."
+                        rows="4"
+                        required></textarea>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label class="elegant-label">Precio (S/.) *</label>
+              <div class="input-container">
+                <span class="currency-symbol">S/</span>
+                <input class="elegant-input price-input" 
+                       type="number" 
+                       [(ngModel)]="dish.price" 
+                       name="price"
+                       placeholder="0.00"
+                       step="0.50"
+                       min="0"
+                       required>
+              </div>
+            </div>
+
+            <div class="form-group half-width">
+              <label class="elegant-label">Categoría *</label>
+              <div class="select-container">
+                <mat-icon class="select-icon">category</mat-icon>
+                <select class="elegant-select" [(ngModel)]="dish.category" name="category" required>
+                  <option value="" disabled>Seleccionar categoría</option>
+                  <option *ngFor="let category of categories" [value]="category">
+                    {{ category }}
+                  </option>
+                </select>
+                <mat-icon class="dropdown-icon">expand_more</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Imagen Elegante -->
+      <div class="elegant-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>image</mat-icon>
+          </div>
+          <h3 class="section-title">Imagen del Plato</h3>
+        </div>
+        
+        <div class="professional-upload">
+          <div class="upload-preview" *ngIf="imagePreview">
+            <div class="preview-container">
+              <img [src]="imagePreview" alt="Preview" class="elegant-preview">
+              <div class="preview-overlay">
+                <button type="button" class="overlay-btn change-btn" (click)="fileInput.click()">
+                  <mat-icon>edit</mat-icon>
+                  <span>Cambiar</span>
+                </button>
+                <button type="button" class="overlay-btn remove-btn" (click)="removeImage()">
+                  <mat-icon>delete</mat-icon>
+                  <span>Quitar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="upload-zone" [class.has-preview]="imagePreview">
+            <input type="file" 
+                   #fileInput 
+                   (change)="onFileSelected($event)" 
+                   accept="image/*"
+                   style="display: none;">
+            
+            <div class="upload-content" *ngIf="!imagePreview" (click)="fileInput.click()">
+              <div class="upload-icon">
+                <mat-icon>add_photo_alternate</mat-icon>
+              </div>
+              <h4 class="upload-title">Subir Imagen</h4>
+              <p class="upload-description">
+                Arrastra una imagen aquí o haz clic para seleccionar
+              </p>
+              <div class="upload-specs">
+                <span class="spec-item">JPG, PNG, GIF</span>
+                <span class="spec-divider">•</span>
+                <span class="spec-item">Máx. 5MB</span>
+                <span class="spec-divider">•</span>
+                <span class="spec-item">Recomendado: 800x600px</span>
+              </div>
+            </div>
+            
+            <button type="button" class="elegant-upload-btn" *ngIf="imagePreview" (click)="fileInput.click()">
+              <mat-icon>edit</mat-icon>
+              Cambiar Imagen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Configuración -->
+      <div class="elegant-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <mat-icon>settings</mat-icon>
+          </div>
+          <h3 class="section-title">Configuración</h3>
+        </div>
+        
+        <div class="availability-container">
+          <div class="availability-toggle">
+            <div class="toggle-info">
+              <div class="toggle-title">
+                <mat-icon class="status-icon" [class.active]="dish.available">
+                  {{ dish.available ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+                <span>Disponibilidad del Plato</span>
+              </div>
+              <p class="toggle-description">
+                {{ dish.available ? 'El plato está disponible para pedidos' : 'El plato no está disponible para pedidos' }}
+              </p>
+            </div>
+            <div class="toggle-switch">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="dish.available" name="available">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </mat-dialog-content>
+
+  <!-- Acciones Profesionales -->
+  <div class="professional-actions">
+    <div class="actions-container">
+      <button type="button" class="elegant-btn cancel-btn" (click)="cancel()">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+      </button>
+      
+      <button type="button" 
+              class="elegant-btn primary-btn" 
+              [disabled]="!isValidForm()"
+              [class.disabled]="!isValidForm()"
+              (click)="save()">
+        <mat-icon>{{ isEdit ? 'save' : 'add_circle' }}</mat-icon>
+        <span>{{ isEdit ? 'Guardar Cambios' : 'Crear Plato' }}</span>
+      </button>
+    </div>
+  </div>
+</div>

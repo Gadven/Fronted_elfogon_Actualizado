@@ -20,7 +20,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   cart: Cart = {
     items: [],
     totalItems: 0,
-    totalPrice: 0
+    subtotal: 0,
+    total: 0
   };
 
   checkoutForm: FormGroup;
@@ -94,7 +95,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       customerPhone: formValue.customerPhone,
       customerEmail: formValue.customerEmail,
       items: this.cart.items,
-      totalAmount: this.cart.totalPrice,
+      totalAmount: this.cart.total,
       orderType: formValue.orderType,
       deliveryAddress: formValue.orderType === 'delivery' ? formValue.deliveryAddress : undefined,
       specialInstructions: formValue.specialInstructions,
@@ -103,27 +104,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       estimatedTime: this.getEstimatedTime()
     };
 
-    this.orderService.createOrder(order).subscribe({
-      next: (createdOrder) => {
-        this.cartService.clearCart();
-        this.snackBar.open('¡Pedido enviado exitosamente!', 'Cerrar', {
-          duration: 5000,
-          panelClass: ['success-snackbar']
-        });
-        this.router.navigate(['/order-confirmation'], { 
-          queryParams: { orderId: createdOrder.idOrder } 
-        });
-        this.isSubmitting = false;
-      },
-      error: (error) => {
-        console.error('Error creating order:', error);
-        this.snackBar.open('Error al procesar el pedido. Inténtalo de nuevo.', 'Cerrar', {
-          duration: 5000,
-          panelClass: ['error-snackbar']
-        });
-        this.isSubmitting = false;
-      }
-    });
+    // Simular envío del pedido (sin backend)
+    setTimeout(() => {
+      this.cartService.clearCart();
+      this.snackBar.open('¡Pedido enviado exitosamente! El restaurante se contactará contigo pronto.', 'Cerrar', {
+        duration: 5000,
+        panelClass: ['success-snackbar']
+      });
+      this.router.navigate(['/menu']);
+      this.isSubmitting = false;
+    }, 2000);
   }
 
   goBackToCart(): void {

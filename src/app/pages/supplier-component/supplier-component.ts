@@ -6,14 +6,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../material/material-module';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { SupplierDialogComponent } from './supplier-dialog-component/supplier-dialog-component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-supplier',
   standalone: true,
-  imports: [MaterialModule, RouterLink],
+  imports: [MaterialModule],
   templateUrl: './supplier-component.html',
   styleUrls: ['./supplier-component.css'],
 })

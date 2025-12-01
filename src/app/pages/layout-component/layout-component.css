@@ -6,24 +6,66 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #fdf2e9 0%, #fbeee6 100%);
 }
 
 .example-toolbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
     color: white !important;
-    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
     z-index: 10;
+    position: relative;
+    overflow: hidden;
 }
 
-.example-toolbar span {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 1px;
+.example-toolbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="100%"><stop offset="0%" stop-color="%23fff" stop-opacity=".1"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>') repeat-x;
+    opacity: 0.3;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-circular {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.logo-container span {
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
 }
 
 .example-toolbar button {
     color: white !important;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s;
+}
+
+.example-toolbar button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50%;
+    transform: scale(1.1);
 }
 
 .example-sidenav-container {
@@ -37,11 +79,34 @@ mat-sidenav {
     padding-top: 20px;
 }
 
-mat-sidenav img {
-    display: block;
-    margin: 0 auto 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.sidenav-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    margin-bottom: 0;
+}
+
+.sidenav-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 12px;
+}
+
+.sidenav-title {
+    color: white;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
 }
 
 .example-spacer {
@@ -49,8 +114,9 @@ mat-sidenav img {
 }
 
 .active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
     color: white;
+    box-shadow: inset 3px 0 0 #f39c12;
 }
 
 .myButton {
@@ -63,13 +129,13 @@ mat-sidenav img {
 }
 
 .myButton:hover {
-    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(90deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.1) 100%);
     padding-left: 28px !important;
 }
 
 .myButton:focus {
     box-shadow: none !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
     color: white;
 }
 

@@ -1,35 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GenericService } from './generic-service';
+import { Observable, of } from 'rxjs';
 import { Product, ProductCategory } from '../model/product';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService extends GenericService<Product> {
+export class ProductService {
 
-  constructor() {
-    super('/products');
-  }
+  constructor() {}
 
-  // Métodos específicos para productos
+  // Métodos que devuelven datos de prueba
   getProductsByCategory(categoryId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.url}/category/${categoryId}`);
+    return of([]);
   }
 
   getAvailableProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.url}/available`);
+    return of([]);
   }
 
   getCategories(): Observable<ProductCategory[]> {
-    return this.http.get<ProductCategory[]>(`${this.url}/categories`);
+    return of([]);
   }
 
   searchProducts(query: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.url}/search?q=${query}`);
+    return of([]);
   }
 
   updateAvailability(productId: number, available: boolean): Observable<Product> {
-    return this.http.patch<Product>(`${this.url}/${productId}/availability`, { available });
+    return of({} as Product);
   }
 }

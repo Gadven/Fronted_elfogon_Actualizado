@@ -27,7 +27,7 @@ td, th {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #667eea;
+  color: #f39c12;
   font-weight: 600;
   font-size: 32px;
   margin: 0;
@@ -51,11 +51,11 @@ td button mat-icon {
 
 /* Botón de editar */
 td button:first-child {
-  color: #667eea;
+  color: #f39c12;
 }
 
 td button:first-child:hover {
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(243, 156, 18, 0.1);
 }
 
 /* Botón de eliminar */
