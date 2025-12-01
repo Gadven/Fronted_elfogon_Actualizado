@@ -1,0 +1,100 @@
+<div class="edit-container">
+    <div class="edit-header">
+        <h2>
+            <mat-icon>{{ isEdit ? 'edit' : 'person_add' }}</mat-icon>
+            {{ isEdit ? 'Editar Empleado' : 'Nuevo Empleado' }}
+        </h2>
+    </div>
+
+    <form [formGroup]="form" class="employee-form">
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="firstName" placeholder="Ingrese el nombre" required>
+                <mat-icon matPrefix>person</mat-icon>
+                @if(f['firstName'].hasError('required')) {
+                    <mat-error>El nombre es obligatorio</mat-error>
+                }
+                @if(f['firstName'].hasError('minlength')) {
+                    <mat-error>Mínimo 2 caracteres</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="lastName" placeholder="Ingrese el apellido" required>
+                <mat-icon matPrefix>person</mat-icon>
+                @if(f['lastName'].hasError('required')) {
+                    <mat-error>El apellido es obligatorio</mat-error>
+                }
+                @if(f['lastName'].hasError('minlength')) {
+                    <mat-error>Mínimo 2 caracteres</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>DNI</mat-label>
+                <input matInput formControlName="dni" placeholder="12345678" maxlength="8" required>
+                <mat-icon matPrefix>badge</mat-icon>
+                @if(f['dni'].hasError('required')) {
+                    <mat-error>El DNI es obligatorio</mat-error>
+                }
+                @if(f['dni'].hasError('pattern')) {
+                    <mat-error>Debe contener exactamente 8 dígitos</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="phone" placeholder="987654321" maxlength="9" required>
+                <mat-icon matPrefix>phone</mat-icon>
+                @if(f['phone'].hasError('required')) {
+                    <mat-error>El teléfono es obligatorio</mat-error>
+                }
+                @if(f['phone'].hasError('pattern')) {
+                    <mat-error>Debe contener exactamente 9 dígitos</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="empleado@ejemplo.com" required>
+            <mat-icon matPrefix>email</mat-icon>
+            @if(f['email'].hasError('required')) {
+                <mat-error>El correo es obligatorio</mat-error>
+            }
+            @if(f['email'].hasError('email')) {
+                <mat-error>Ingrese un correo válido</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="address" placeholder="Ingrese la dirección completa">
+            <mat-icon matPrefix>home</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Cargo</mat-label>
+            <input matInput formControlName="position" placeholder="Ej: Mesero, Cocinero, Administrador" required>
+            <mat-icon matPrefix>work</mat-icon>
+            @if(f['position'].hasError('required')) {
+                <mat-error>El cargo es obligatorio</mat-error>
+            }
+        </mat-form-field>
+
+        <div class="button-group">
+            <button mat-raised-button color="primary" (click)="operate()" type="button">
+                <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
+                {{ isEdit ? 'Guardar Cambios' : 'Crear Empleado' }}
+            </button>
+            <button mat-raised-button routerLink="/pages/patient" type="button">
+                <mat-icon>cancel</mat-icon>
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

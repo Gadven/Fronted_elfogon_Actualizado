@@ -1,0 +1,51 @@
+<mat-dialog-content class="dialog-container">
+    <div class="dialog-header">
+        <h2>
+            <mat-icon>{{ supplier.idSupplier ? 'edit' : 'add_business' }}</mat-icon>
+            {{ supplier.idSupplier ? 'Editar Proveedor' : 'Nuevo Proveedor' }}
+        </h2>
+    </div>
+
+    <div class="supplier-form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>RUC</mat-label>
+            <input matInput placeholder="12345678901" [(ngModel)]="supplier.ruc" maxlength="11">
+            <mat-icon matPrefix>badge</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre de la Empresa</mat-label>
+            <input matInput placeholder="Ingrese el nombre de la empresa" [(ngModel)]="supplier.name">
+            <mat-icon matPrefix>business</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Teléfono</mat-label>
+            <input matInput placeholder="987654321" [(ngModel)]="supplier.phone" maxlength="9">
+            <mat-icon matPrefix>phone</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput type="email" placeholder="proveedor@ejemplo.com" [(ngModel)]="supplier.email">
+            <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Dirección</mat-label>
+            <input matInput placeholder="Ingrese la dirección completa" [(ngModel)]="supplier.address">
+            <mat-icon matPrefix>location_on</mat-icon>
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button color="primary" (click)="operate()">
+        <mat-icon>{{ supplier.idSupplier ? 'save' : 'add' }}</mat-icon>
+        {{ supplier.idSupplier ? 'Guardar Cambios' : 'Crear Proveedor' }}
+    </button>
+    <button mat-raised-button (click)="close()">
+        <mat-icon>cancel</mat-icon>
+        Cancelar
+    </button>
+</mat-dialog-actions>

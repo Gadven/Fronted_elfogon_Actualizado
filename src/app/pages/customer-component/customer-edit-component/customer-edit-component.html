@@ -1,0 +1,46 @@
+<form class="example-container" [formGroup]="form" (submit)="operate()">
+    <h2>
+        <mat-icon>person_add</mat-icon>
+        {{ isEdit ? 'Editar Cliente' : 'Nuevo Cliente' }}
+    </h2>
+    
+    <div [hidden]="true">
+        <mat-form-field>
+        <input matInput placeholder="ID" formControlName ="idCustomer">
+    </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="DNI" formControlName ="dni">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Nombre" formControlName ="firstName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Apellido" formControlName ="lastName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Teléfono" formControlName ="phone">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Dirección" formControlName ="address">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Correo electrónico" formControlName ="email">
+    </mat-form-field>
+
+    <button mat-button type="submit">
+        <mat-icon>done</mat-icon>
+        <span>Guardar</span>
+    </button>
+
+    <button mat-button type="button"  routerLink="/pages/customer">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancelar</span>
+    </button>
+</form>

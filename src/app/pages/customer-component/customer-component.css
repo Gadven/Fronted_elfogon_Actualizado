@@ -1,0 +1,68 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+}
+
+td, th {
+  width: auto;
+}
+
+/* Contenedor del componente */
+:host {
+  display: block;
+  padding: 20px;
+}
+
+/* Encabezado de página */
+.page-header {
+  margin: 0 20px 30px;
+}
+
+.page-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0;
+}
+
+.page-header h1 mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+/* Botones de acción en la tabla */
+td button {
+  margin: 0 4px;
+  min-width: 100px;
+}
+
+td button mat-icon {
+  margin-right: 4px;
+}
+
+/* Botón de editar */
+td button:first-child {
+  color: #667eea;
+}
+
+td button:first-child:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* Botón de eliminar */
+td button:last-child {
+  color: #f44336;
+}
+
+td button:last-child:hover {
+  background: rgba(244, 67, 54, 0.1);
+}

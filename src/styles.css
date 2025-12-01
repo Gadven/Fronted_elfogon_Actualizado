@@ -1,0 +1,92 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Mejoras para tablas */
+.mat-elevation-z8 {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  background: white;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td.mat-cell {
+  padding: 14px !important;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+tr.mat-row:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+/* Botones mejorados */
+button.mat-mdc-button, button.mat-mdc-raised-button {
+  border-radius: 8px !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+button.mat-mdc-fab {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  transition: all 0.3s ease;
+}
+
+button.mat-mdc-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+
+/* Campos de formulario mejorados */
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+}
+
+/* Paginador */
+.mat-mdc-paginator {
+  background: white;
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Filtro mejorado */
+mat-form-field {
+  margin: 20px;
+}
+
+/* Animaciones suaves */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
