@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Customer } from '../model/customer';
+import { Cliente } from '../model/customer';
 import { Subject } from 'rxjs';
 import { GenericService } from './generic-service';
 
@@ -9,16 +9,16 @@ import { GenericService } from './generic-service';
   providedIn: 'root'
 })
 
-export class CustomerService extends GenericService<Customer> {
-  // private url: string = `${environment.HOST}/customers`;
-  private customerChange: Subject<Customer[]> = new Subject<Customer[]>;
+export class CustomerService extends GenericService<Cliente> {
+  // private url: string = `${environment.HOST}/clientes`;
+  private customerChange: Subject<Cliente[]> = new Subject<Cliente[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
   // constructor(private http: HttpClient){}
   constructor(){
     super(
       inject(HttpClient),
-      `${environment.HOST}/customers`
+      `${environment.HOST}/clientes`
     );
     
   }
@@ -44,7 +44,7 @@ export class CustomerService extends GenericService<Customer> {
   // }
 
   //////////////////////////
-  setCustomerChange(data: Customer[]){
+  setCustomerChange(data: Cliente[]){
     this.customerChange.next(data);
   }
 

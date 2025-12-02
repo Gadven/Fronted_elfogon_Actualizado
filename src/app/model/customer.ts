@@ -1,9 +1,8 @@
-export class Customer{
-    idCustomer: number;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    dni: string;
-    address: string;
+export class Cliente{
+    idCliente: number;
+    nombre: string;
+    apellido: string;
+    telefono: string;
+    correo: string;
+    direccion: string;
 }

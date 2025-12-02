@@ -1,10 +1,7 @@
-export class Employee {
-    idEmployee: number;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    dni: string;
-    address: string;
-    position: string; // cargo/puesto
+export class Usuario {
+    idUsuario: number;
+    nombre: string;
+    usuario: string;
+    contraseña: string;
+    rol: string; // ADMIN / MOZO / CAJERO
 }
