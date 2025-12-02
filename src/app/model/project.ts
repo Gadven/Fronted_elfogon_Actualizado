@@ -1,4 +1,4 @@
-import { Customer } from "./customer";
+import { Cliente } from "./customer";
 
 export class Project{
     idProject: number;
@@ -7,5 +7,5 @@ export class Project{
     startDate: Date;
     estimatedEndDate: Date;
     status: string;
-    customer: Customer;
+    customer: Cliente;
 }

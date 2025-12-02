@@ -3,7 +3,7 @@ import { MaterialModule } from '../../../material/material-module';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CustomerService } from '../../../services/customer-service';
-import { Customer } from '../../../model/customer';
+import { Cliente } from '../../../model/customer';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -26,13 +26,12 @@ export class CustomerEditComponent {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      idCustomer: new FormControl(),
-      dni: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      phone: new FormControl(''),
-      address: new FormControl(''),
-      email: new FormControl(''),
+      idCliente: new FormControl(),
+      nombre: new FormControl(''),
+      apellido: new FormControl(''),
+      telefono: new FormControl(''),
+      direccion: new FormControl(''),
+      correo: new FormControl(''),
     });
 
     this.route.params.subscribe((data) => {
@@ -46,29 +45,25 @@ export class CustomerEditComponent {
     if (this.isEdit) {
       this.customerService.findById(this.id).subscribe((data) => {
         this.form = new FormGroup({
-          idCustomer: new FormControl(data.idCustomer),
-          dni: new FormControl(data.dni),
-          firstName: new FormControl(data.firstName),
-          lastName: new FormControl(data.lastName),
-          phone: new FormControl(data.phone),
-          email: new FormControl(data.email),
-          address: new FormControl(data.address),
+          idCliente: new FormControl(data.idCliente),
+          nombre: new FormControl(data.nombre),
+          apellido: new FormControl(data.apellido),
+          telefono: new FormControl(data.telefono),
+          correo: new FormControl(data.correo),
+          direccion: new FormControl(data.direccion),
         });
       });
     }
   }
 
   operate() {
-    const customer: Customer = new Customer();
-    customer.idCustomer = this.form.value['idCustomer'];
-    // const x = this.form.controls['idCustomer'].value;
-    // const y = this.form.get['idCustomer'].value;
-    customer.dni = this.form.value['dni'];
-    customer.firstName = this.form.value['firstName'];
-    customer.lastName = this.form.value['lastName'];
-    customer.phone = this.form.value['phone'];
-    customer.email = this.form.value['email'];
-    customer.address = this.form.value['address'];
+    const customer: Cliente = new Cliente();
+    customer.idCliente = this.form.value['idCliente'];
+    customer.nombre = this.form.value['nombre'];
+    customer.apellido = this.form.value['apellido'];
+    customer.telefono = this.form.value['telefono'];
+    customer.correo = this.form.value['correo'];
+    customer.direccion = this.form.value['direccion'];
 
     if (this.isEdit) {
       // EDIT

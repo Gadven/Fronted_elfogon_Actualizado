@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../model/employee';
+import { Usuario } from '../model/employee';
 import { Subject } from 'rxjs';
 import { GenericService } from './generic-service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class EmployeeService extends GenericService<Employee> {
-    private employeeChange: Subject<Employee[]> = new Subject<Employee[]>;
+export class EmployeeService extends GenericService<Usuario> {
+    private employeeChange: Subject<Usuario[]> = new Subject<Usuario[]>;
     private messageChange: Subject<string> = new Subject<string>;
 
     constructor() {
@@ -19,7 +19,7 @@ export class EmployeeService extends GenericService<Employee> {
         );
     }
 
-    setEmployeeChange(data: Employee[]) {
+    setEmployeeChange(data: Usuario[]) {
         this.employeeChange.next(data);
     }
 

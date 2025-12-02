@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from '../../services/employee-service';
-import { Employee } from '../../model/employee';
+import { Usuario } from '../../model/employee';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -24,8 +24,8 @@ import { CommonModule } from '@angular/common';
 })
 export class EmployeeComponent implements OnInit {
 
-    dataSource: MatTableDataSource<Employee>;
-    displayedColumns: string[] = ['idEmployee', 'firstName', 'lastName', 'dni', 'phone', 'email', 'position', 'actions'];
+    dataSource: MatTableDataSource<Usuario>;
+    displayedColumns: string[] = ['idUsuario', 'nombre', 'usuario', 'contraseña', 'rol', 'actions'];
     
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -53,7 +53,7 @@ export class EmployeeComponent implements OnInit {
         });
     }
 
-    createTable(data: Employee[]) {
+    createTable(data: Usuario[]) {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -64,8 +64,8 @@ export class EmployeeComponent implements OnInit {
         this.dataSource.filter = e.target.value.trim().toLowerCase();
     }
 
-    delete(idEmployee: number) {
-        this.employeeService.delete(idEmployee).pipe(switchMap(() => {
+    delete(idUsuario: number) {
+        this.employeeService.delete(idUsuario).pipe(switchMap(() => {
             return this.employeeService.findAll();
         }))
             .subscribe(data => {
@@ -74,10 +74,10 @@ export class EmployeeComponent implements OnInit {
             });
     }
 
-    openDialog(employee?: Employee) {
+    openDialog(employee?: Usuario) {
         // Navegación al formulario de edición
         if (employee) {
-            this.router.navigate(['edit', employee.idEmployee], { relativeTo: this.route });
+            this.router.navigate(['edit', employee.idUsuario], { relativeTo: this.route });
         } else {
             this.router.navigate(['new'], { relativeTo: this.route });
         }

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { EmployeeService } from '../../../services/employee-service';
-import { Employee } from '../../../model/employee';
+import { Usuario } from '../../../model/employee';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,14 +32,11 @@ export class EmployeeEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            idEmployee: new FormControl(0),
-            firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-            lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-            dni: new FormControl('', [Validators.required, Validators.pattern(/^\d{8}$/)]),
-            phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{9}$/)]),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            address: new FormControl(''),
-            position: new FormControl('', [Validators.required])
+            idUsuario: new FormControl(0),
+            nombre: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            usuario: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            contraseña: new FormControl('', [Validators.required]),
+            rol: new FormControl('', [Validators.required])
         });
 
         this.route.params.subscribe(data => {
@@ -63,7 +60,7 @@ export class EmployeeEditComponent implements OnInit {
             return;
         }
 
-        const employee: Employee = this.form.value;
+        const employee: Usuario = this.form.value;
 
         if (this.isEdit) {
             // UPDATE

@@ -1,6 +1,6 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { CustomerService } from '../../services/customer-service';
-import { Customer } from '../../model/customer';
+import { Cliente } from '../../model/customer';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,16 +18,15 @@ import { switchMap } from 'rxjs';
 })
 export class CustomerComponent {
   // customers: Customer[];
-  dataSource: MatTableDataSource<Customer>;
+  dataSource: MatTableDataSource<Cliente>;
   // displayedColumns: string[] = ['idCustomer', 'dni', 'firstName', 'lastName', 'phone','address'];
   columnsDefinitions = [
-    { def: 'idCustomer', label: 'idCustomer', hide: true },
-    { def: 'dni', label: 'dni', hide: false },
-    { def: 'firstName', label: 'firstName', hide: false },
-    { def: 'lastName', label: 'lastName', hide: false },
-    { def: 'phone', label: 'phone', hide: false },
-    { def: 'email', label: 'email', hide: false },
-    { def: 'address', label: 'address', hide: false },
+    { def: 'idCliente', label: 'idCliente', hide: true },
+    { def: 'nombre', label: 'nombre', hide: false },
+    { def: 'apellido', label: 'apellido', hide: false },
+    { def: 'telefono', label: 'telefono', hide: false },
+    { def: 'correo', label: 'correo', hide: false },
+    { def: 'direccion', label: 'direccion', hide: false },
     { def: 'actions', label: 'actions', hide: false },
   ];
 
@@ -56,7 +55,7 @@ export class CustomerComponent {
     );
   }
 
-  createTable(data: Customer[]) {
+  createTable(data: Cliente[]) {
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
