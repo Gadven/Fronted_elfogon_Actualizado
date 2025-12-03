@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [MaterialModule, RouterOutlet, RouterLink],
+  imports: [MaterialModule, RouterLink],
   templateUrl: './customer-component.html',
   styleUrls: ['./customer-component.css'],
 })

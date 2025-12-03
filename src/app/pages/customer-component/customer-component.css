@@ -66,3 +66,18 @@ td button:last-child {
 td button:last-child:hover {
   background: rgba(244, 67, 54, 0.1);
 }
+
+/* Botón FAB flotante */
+.add-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  color: white;
+  box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+}
+
+.add-button:hover {
+  box-shadow: 0 6px 25px rgba(243, 156, 18, 0.6);
+  transform: scale(1.05);
+}

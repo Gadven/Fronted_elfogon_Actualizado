@@ -38,27 +38,18 @@
   <!-- Grid de productos -->
   <div *ngIf="!loading && filteredProducts.length > 0" class="products-grid">
     <mat-card *ngFor="let product of filteredProducts" class="product-card">
-      <!-- Imagen del producto -->
-      <div class="product-image">
-        <img [src]="product.imageUrl || '/assets/default-food.jpg'" 
-             [alt]="product.name"
-             onerror="this.src='/assets/default-food.jpg'">
-      </div>
-
-      <!-- Contenido del producto -->
-      <mat-card-content>
-        <div class="product-info">
-          <h3 class="product-name">{{product.name}}</h3>
-          <p class="product-description">{{product.description}}</p>
-          <div class="product-details">
-            <span class="product-price">{{formatPrice(product.price)}}</span>
-            <span *ngIf="product.preparationTime" class="preparation-time">
-              <mat-icon>schedule</mat-icon>
-              {{product.preparationTime}} min
-            </span>
-          </div>
+      <!-- Contenido del producto - SIN imágenes -->
+      <div class="product-info">
+        <h3 class="product-name">{{product.name}}</h3>
+        <p class="product-description">{{product.description}}</p>
+        <div class="product-details">
+          <span class="product-price">{{formatPrice(product.price)}}</span>
+          <span *ngIf="product.preparationTime" class="preparation-time">
+            <mat-icon>schedule</mat-icon>
+            {{product.preparationTime}} min
+          </span>
         </div>
-      </mat-card-content>
+      </div>
 
       <!-- Acciones -->
       <mat-card-actions class="product-actions">

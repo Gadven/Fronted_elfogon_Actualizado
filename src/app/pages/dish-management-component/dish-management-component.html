@@ -72,20 +72,11 @@
   <!-- Grid de Platos Elegante -->
   <div class="dishes-grid">
     <div *ngFor="let dish of filteredDishes" class="elegant-dish-card">
-      <!-- Contenedor de Imagen Elegante -->
-      <div class="elegant-image-container">
-        <img [src]="getImageUrl(dish.imageUrl)" 
-             [alt]="dish.name"
-             class="elegant-dish-image"
-             (error)="$event.target.src='assets/default-dish.svg'">
-        <div class="image-overlay"></div>
-        
-        <!-- Badge de Estado -->
-        <div class="status-badge" 
-             [class.status-available]="dish.available"
-             [class.status-unavailable]="!dish.available">
-          {{ dish.available ? 'Disponible' : 'No Disponible' }}
-        </div>
+      <!-- Badge de Estado SIN IMAGEN -->
+      <div class="status-badge-no-image" 
+           [class.status-available]="dish.available"
+           [class.status-unavailable]="!dish.available">
+        {{ dish.available ? 'DISPONIBLE' : 'NO DISPONIBLE' }}
       </div>
 
       <!-- Contenido Elegante -->

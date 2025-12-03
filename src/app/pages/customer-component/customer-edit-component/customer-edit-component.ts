@@ -27,6 +27,7 @@ export class CustomerEditComponent {
   ngOnInit(): void {
     this.form = new FormGroup({
       idCliente: new FormControl(),
+      dni: new FormControl(''),
       nombre: new FormControl(''),
       apellido: new FormControl(''),
       telefono: new FormControl(''),
@@ -46,6 +47,7 @@ export class CustomerEditComponent {
       this.customerService.findById(this.id).subscribe((data) => {
         this.form = new FormGroup({
           idCliente: new FormControl(data.idCliente),
+          dni: new FormControl(data.dni),
           nombre: new FormControl(data.nombre),
           apellido: new FormControl(data.apellido),
           telefono: new FormControl(data.telefono),
@@ -59,6 +61,7 @@ export class CustomerEditComponent {
   operate() {
     const customer: Cliente = new Cliente();
     customer.idCliente = this.form.value['idCliente'];
+    customer.dni = this.form.value['dni'];
     customer.nombre = this.form.value['nombre'];
     customer.apellido = this.form.value['apellido'];
     customer.telefono = this.form.value['telefono'];

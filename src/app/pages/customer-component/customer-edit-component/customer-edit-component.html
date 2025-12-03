@@ -1,46 +1,64 @@
-<form class="example-container" [formGroup]="form" (submit)="operate()">
-    <h2>
-        <mat-icon>person_add</mat-icon>
-        {{ isEdit ? 'Editar Cliente' : 'Nuevo Cliente' }}
-    </h2>
-    
-    <div [hidden]="true">
-        <mat-form-field>
-        <input matInput placeholder="ID" formControlName ="idCustomer">
-    </mat-form-field>
-    </div>
+<div class="form-wrapper">
+    <form class="customer-form" [formGroup]="form" (submit)="operate()">
+        <h2>
+            <mat-icon>person_add</mat-icon>
+            {{ isEdit ? 'Editar Cliente' : 'Nuevo Cliente' }}
+        </h2>
+        
+        <div [hidden]="true">
+            <mat-form-field>
+                <input matInput placeholder="ID" formControlName="idCliente">
+            </mat-form-field>
+        </div>
 
-    <mat-form-field>
-        <input matInput placeholder="DNI" formControlName ="dni">
-    </mat-form-field>
+        <div class="form-grid">
+            <mat-form-field appearance="outline">
+                <mat-label>DNI</mat-label>
+                <input matInput placeholder="Ingrese DNI" formControlName="dni">
+                <mat-icon matPrefix>badge</mat-icon>
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Nombre" formControlName ="firstName">
-    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Ingrese nombre" formControlName="nombre">
+                <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Apellido" formControlName ="lastName">
-    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Ingrese apellido" formControlName="apellido">
+                <mat-icon matPrefix>person_outline</mat-icon>
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Teléfono" formControlName ="phone">
-    </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="Ingrese teléfono" formControlName="telefono">
+                <mat-icon matPrefix>phone</mat-icon>
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Dirección" formControlName ="address">
-    </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Ingrese dirección" formControlName="direccion">
+                <mat-icon matPrefix>home</mat-icon>
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Correo electrónico" formControlName ="email">
-    </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" placeholder="correo@ejemplo.com" formControlName="correo">
+                <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+        </div>
 
-    <button mat-button type="submit">
-        <mat-icon>done</mat-icon>
-        <span>Guardar</span>
-    </button>
+        <div class="form-actions">
+            <button mat-raised-button type="submit" class="submit-btn">
+                <mat-icon>done</mat-icon>
+                <span>Guardar</span>
+            </button>
 
-    <button mat-button type="button"  routerLink="/pages/customer">
-        <mat-icon>cancel</mat-icon>
-        <span>Cancelar</span>
-    </button>
-</form>
+            <button mat-raised-button type="button" class="cancel-btn" routerLink="/pages/customer">
+                <mat-icon>cancel</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+    </form>
+</div>

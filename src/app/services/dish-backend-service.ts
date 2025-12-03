@@ -8,10 +8,10 @@ import { Dish } from '../pages/dish-management-component/dish-management-compone
 })
 export class DishBackendService {
   
-  // ✅ CONFIGURACIÓN PARA TU BACKEND - Actualiza estas URLs cuando tengas tu servidor
-  private readonly API_BASE_URL = 'http://localhost:8080/api'; // Cambia por tu URL
-  private readonly DISHES_ENDPOINT = `${this.API_BASE_URL}/dishes`;
-  private readonly UPLOAD_ENDPOINT = `${this.API_BASE_URL}/dishes/upload`;
+  // ✅ CONFIGURACIÓN PARA TU BACKEND - Actualizada para puerto 9090
+  private readonly API_BASE_URL = 'http://localhost:9090'; // Backend Spring Boot
+  private readonly DISHES_ENDPOINT = `${this.API_BASE_URL}/platos`;
+  private readonly UPLOAD_ENDPOINT = `${this.API_BASE_URL}/platos/upload`;
 
   constructor(private http: HttpClient) {}
 

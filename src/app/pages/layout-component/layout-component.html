@@ -54,20 +54,28 @@
 
             <mat-divider></mat-divider>
 
+            <!-- Gestión de Pedidos -->
+            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/orders" style="cursor: pointer">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>Pedidos</span>
+            </button>
+
+            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/payments" style="cursor: pointer">
+                <mat-icon>payment</mat-icon>
+                <span>Pagos</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
             <!-- Administración -->
             <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/customer" style="cursor: pointer">
                 <mat-icon>people</mat-icon>
                 <span>Clientes</span>
             </button>
 
-            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/supplier" style="cursor: pointer">
-                <mat-icon>business</mat-icon>
-                <span>Proveedores</span>
-            </button>
-
-            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/patient" style="cursor: pointer">
-                <mat-icon>badge</mat-icon>
-                <span>Empleados</span>
+            <button class="myButton" mat-menu-item (click)="sidenav.toggle()" routerLink="/pages/users" style="cursor: pointer">
+                <mat-icon>account_circle</mat-icon>
+                <span>Usuarios</span>
             </button>
 
             <mat-divider></mat-divider>

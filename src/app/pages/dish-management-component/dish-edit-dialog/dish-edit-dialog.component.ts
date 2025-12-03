@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-// import { HttpClient } from '@angular/common/http'; // ✅ DESCOMENTA CUANDO TENGAS TU BACKEND
+import { HttpClient } from '@angular/common/http'; // ✅ BACKEND ACTIVADO
 import { Dish } from '../dish-management-component';
 
 @Component({
@@ -29,6 +29,7 @@ import { Dish } from '../dish-management-component';
   styleUrl: './dish-edit-dialog.component.css'
 })
 export class DishEditDialogComponent implements OnInit {
+  private readonly API_BASE_URL = 'http://localhost:9090';
 
   dish: Partial<Dish> = {
     name: '',
@@ -41,23 +42,27 @@ export class DishEditDialogComponent implements OnInit {
 
   categories = ['Platos Principales', 'Entradas', 'Aperitivos', 'Bebidas', 'Postres'];
   isEdit = false;
-  selectedFile: File | null = null;
-  imagePreview: string | null = null;
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  // selectedFile: File | null = null;
+  // imagePreview: string | null = null;
 
   constructor(
     public dialogRef: MatDialogRef<DishEditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { dish: Dish | null, isEdit: boolean }
-    // private httpClient: HttpClient // ✅ DESCOMENTA CUANDO TENGAS TU BACKEND
+    @Inject(MAT_DIALOG_DATA) public data: { dish: Dish | null, isEdit: boolean },
+    private httpClient: HttpClient // ✅ BACKEND ACTIVADO
   ) {
     this.isEdit = data.isEdit;
     if (data.dish) {
       this.dish = { ...data.dish };
-      this.imagePreview = this.getImageUrl(data.dish.imageUrl);
+      // TEMPORALMENTE COMENTADO - para versión sin imágenes
+      // this.imagePreview = this.getImageUrl(data.dish.imageUrl);
     }
   }
 
   ngOnInit() {}
 
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  /*
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -74,57 +79,138 @@ export class DishEditDialogComponent implements OnInit {
       this.dish.imageUrl = file.name;
     }
   }
+  */
 
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  /*
   getImageUrl(imageUrl: string): string {
-    if (!imageUrl) return '';
+    if (!imageUrl) {
+      // Buscar imagen en localStorage usando el ID del plato
+      if (this.dish.id) {
+        const storedImage = localStorage.getItem(`plato_image_${this.dish.id}`);
+        if (storedImage) {
+          return storedImage;
+        }
+      }
+      return '';
+    }
     if (imageUrl.startsWith('http') || imageUrl.startsWith('data:')) {
       return imageUrl;
     }
     return `assets/${imageUrl}`;
   }
+  */
 
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  /*
   removeImage() {
     this.selectedFile = null;
     this.imagePreview = null;
     this.dish.imageUrl = '';
   }
+  */
 
   save() {
+    console.log('🔍 Método save() llamado');
+    console.log('🔍 Datos del plato:', this.dish);
+    console.log('🔍 Formulario válido:', this.isValidForm());
+    
     if (this.isValidForm()) {
-      if (this.selectedFile) {
-        // ✅ PREPARADO PARA TU BACKEND - Descomenta cuando tengas el servidor
-        // this.uploadImageAndSave();
-        
-        // 🔄 FUNCIONAMIENTO ACTUAL - Solo para testing sin backend
-        console.log('Archivo seleccionado:', this.selectedFile.name);
-        console.log('Listo para subir al backend cuando esté conectado');
-        this.dish.imageUrl = this.selectedFile.name; // Temporal
-      }
-      
-      this.dialogRef.close(this.dish);
+      console.log('💾 Guardando plato...');
+      this.saveDishLocally();
+    } else {
+      console.log('❌ Formulario inválido');
+      alert('Por favor completa todos los campos requeridos');
     }
   }
 
-  // ✅ MÉTODO PREPARADO PARA TU BACKEND - Descomenta cuando esté listo
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
   /*
   private uploadImageAndSave() {
-    const formData = new FormData();
-    formData.append('image', this.selectedFile!);
-    formData.append('dishData', JSON.stringify(this.dish));
+    console.log('Guardando plato con imagen en localStorage...');
     
-    // Llamada a tu API backend
-    this.httpClient.post('/api/dishes/upload', formData).subscribe({
+    // Convertir imagen a base64 para guardar en localStorage
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Image = e.target?.result as string;
+      
+      // Generar ID único si es un plato nuevo
+      if (!this.dish.id) {
+        this.dish.id = Date.now(); // Usar timestamp como ID único
+      }
+      
+      // Guardar la imagen en localStorage
+      localStorage.setItem(`plato_image_${this.dish.id}`, base64Image);
+      this.dish.imageUrl = base64Image;
+      
+      // Llamar al método normal de guardar que maneja localStorage
+      this.saveDishLocally();
+    };
+    
+    reader.readAsDataURL(this.selectedFile!);
+  }
+  */
+  
+  private saveDishLocally() {
+    console.log('💾 Guardando plato localmente:', this.dish);
+    
+    // Generar ID si no existe
+    if (!this.dish.id) {
+      this.dish.id = Date.now();
+    }
+    
+    // Asegurar que todos los campos estén completos
+    const dishToSave = {
+      id: this.dish.id,
+      name: this.dish.name,
+      description: this.dish.description,
+      price: this.dish.price,
+      category: this.dish.category,
+      imageUrl: 'assets/default-dish.jpg', // Imagen por defecto
+      available: this.dish.available ?? true
+    };
+    
+    console.log('✅ Plato preparado para guardar:', dishToSave);
+    alert('¡Plato guardado exitosamente!');
+    this.dialogRef.close(dishToSave);
+  }
+
+  private saveDish() {
+    // Guardar plato usando el endpoint tradicional
+    const platoData = {
+      nombre: this.dish.name,
+      descripcion: this.dish.description,
+      precio: this.dish.price,
+      categoria: this.dish.category,
+      estado: this.dish.available ? 'DISPONIBLE' : 'NO_DISPONIBLE'
+    };
+    
+    console.log('Guardando plato:', platoData);
+    
+    this.httpClient.post(`${this.API_BASE_URL}/platos`, platoData).subscribe({
       next: (response: any) => {
-        this.dish.imageUrl = response.imageUrl; // URL devuelta por tu servidor
+        console.log('✅ Plato guardado exitosamente:', response);
+        
+        if (response.idPlato) {
+          this.dish.id = response.idPlato;
+        }
+        
+        alert('¡Plato guardado exitosamente!');
         this.dialogRef.close(this.dish);
       },
       error: (error) => {
-        console.error('Error al subir imagen:', error);
-        alert('Error al subir la imagen. Intenta nuevamente.');
+        console.error('❌ Error al guardar plato:', error);
+        
+        if (error.status === 0) {
+          alert('Error de conexión: Verifica que el backend esté corriendo');
+        } else if (error.status === 400) {
+          alert('Error de validación: Revisa que los datos sean correctos');
+        } else {
+          alert(`Error al guardar: ${error.message || 'Error desconocido'}`);
+        }
       }
     });
   }
-  */
 
   cancel() {
     this.dialogRef.close();

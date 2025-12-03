@@ -1,0 +1,88 @@
+<mat-toolbar>{{ getTitle() }}</mat-toolbar>
+
+<div class="example-container">
+  <form [formGroup]="form" (ngSubmit)="operate()">
+    
+    <div class="example-section" *ngIf="isEdit">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="idUsuario" readonly>
+      </mat-form-field>
+    </div>
+
+    <div class="example-section">
+      <mat-form-field>
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput formControlName="nombre" required maxlength="80">
+        <mat-error *ngIf="form.controls['nombre'].hasError('required')">
+          El nombre es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="form.controls['nombre'].hasError('maxlength')">
+          Máximo 80 caracteres
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-section">
+      <mat-form-field>
+        <mat-label>Usuario (Login)</mat-label>
+        <input matInput formControlName="usuario" required maxlength="40">
+        <mat-error *ngIf="form.controls['usuario'].hasError('required')">
+          El usuario es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="form.controls['usuario'].hasError('maxlength')">
+          Máximo 40 caracteres
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-section">
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" 
+               formControlName="contraseña" 
+               [required]="!isEdit"
+               maxlength="120">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-hint *ngIf="isEdit">Dejar en blanco para mantener la actual</mat-hint>
+        <mat-error *ngIf="form.controls['contraseña'].hasError('required')">
+          La contraseña es <strong>requerida</strong>
+        </mat-error>
+        <mat-error *ngIf="form.controls['contraseña'].hasError('minlength')">
+          Mínimo 6 caracteres
+        </mat-error>
+        <mat-error *ngIf="form.controls['contraseña'].hasError('maxlength')">
+          Máximo 120 caracteres
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-section">
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol" required>
+          <mat-option *ngFor="let rol of roles" [value]="rol">
+            {{ rol }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['rol'].hasError('required')">
+          El rol es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-button-row">
+      <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">
+        <mat-icon>done</mat-icon>
+        <span>GUARDAR</span>
+      </button>
+      <button mat-raised-button type="button" color="accent" routerLink="/pages/users">
+        <mat-icon>close</mat-icon>
+        <span>CANCELAR</span>
+      </button>
+    </div>
+
+  </form>
+</div>

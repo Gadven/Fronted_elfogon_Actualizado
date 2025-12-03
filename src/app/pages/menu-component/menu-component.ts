@@ -58,7 +58,7 @@ export class MenuComponent implements OnInit {
           description: 'Delicioso pollo a la brasa con papas fritas y ensalada',
           price: 25.00,
           category: 'Platos Principales',
-          imageUrl: '/Choclo tierno con queso.jpg',
+          imageUrl: '',
           available: true,
           preparationTime: 25
         },
@@ -68,7 +68,7 @@ export class MenuComponent implements OnInit {
           description: 'Fresco ceviche de pescado y mariscos con camote y choclo',
           price: 30.00,
           category: 'Platos Principales',
-          imageUrl: '/Humitas.png',
+          imageUrl: '',
           available: true,
           preparationTime: 15
         },
@@ -78,7 +78,7 @@ export class MenuComponent implements OnInit {
           description: 'Choclo tierno acompañado con queso fresco',
           price: 8.00,
           category: 'Entradas',
-          imageUrl: '/Choclo tierno con queso.jpg',
+          imageUrl: '',
           available: true,
           preparationTime: 10
         },
@@ -88,7 +88,7 @@ export class MenuComponent implements OnInit {
           description: 'Humitas caseras envueltas en chala de choclo',
           price: 6.00,
           category: 'Entradas',
-          imageUrl: '/Humitas.png',
+          imageUrl: '',
           available: true,
           preparationTime: 8
         },
@@ -98,7 +98,7 @@ export class MenuComponent implements OnInit {
           description: 'La bebida del sabor nacional',
           price: 5.00,
           category: 'Bebidas',
-          imageUrl: '/El_fogon.jpg',
+          imageUrl: '',
           available: true,
           preparationTime: 2
         },
@@ -108,7 +108,7 @@ export class MenuComponent implements OnInit {
           description: 'Tradicional yuyo preparado en crema',
           price: 18.00,
           category: 'Platos Principales',
-          imageUrl: '/Yuyo en Crema.jpg',
+          imageUrl: '',
           available: true,
           preparationTime: 20
         }

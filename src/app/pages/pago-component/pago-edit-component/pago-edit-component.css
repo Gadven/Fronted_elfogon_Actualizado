@@ -1,0 +1,26 @@
+.example-container {
+  margin: 20px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 500px;
+}
+
+.example-button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.example-button-row button {
+  flex: 1;
+  max-width: 200px;
+}

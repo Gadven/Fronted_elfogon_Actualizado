@@ -91,6 +91,7 @@
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
+/* TEMPORALMENTE COMENTADO - para versión sin imágenes
 .product-image {
   height: 200px;
   overflow: hidden;
@@ -107,10 +108,36 @@
 .product-card:hover .product-image img {
   transform: scale(1.05);
 }
+*/
+
+/* Estilos para tarjetas sin imagen */
+.product-card {
+  border-top: 4px solid #d32f2f;
+  overflow: hidden;
+}
+
+.product-card .mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.product-card mat-card-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 .product-info {
   flex-grow: 1;
-  padding: 16px;
+  padding: 20px;
+  background: white;
+}
+
+/* Eliminar cualquier espaciado extra del mat-card */
+.product-card .mat-card-header {
+  display: none;
+}
+
+.product-card .mat-card-image {
+  display: none;
 }
 
 .product-name {
@@ -219,4 +246,53 @@
   .products-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ESTILOS AGRESIVOS PARA ELIMINAR ESPACIOS DE IMAGEN */
+.product-card {
+  padding: 0 !important;
+  margin-bottom: 16px !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.product-card .mdc-card,
+.product-card .mat-mdc-card {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+}
+
+.product-card .mat-mdc-card-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.product-card .mat-mdc-card-header,
+.product-card .mat-mdc-card-image,
+.product-card .product-image,
+.product-card .mat-card-header,
+.product-card .mat-card-image {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Resetear completamente estructura de Material Design */
+.product-card .mat-card-content,
+.product-card mat-card-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Asegurar que la información del producto sea lo único visible */
+.product-info {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
 }

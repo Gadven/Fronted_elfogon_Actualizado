@@ -59,13 +59,15 @@ import { Dish } from '../dish-management-component/dish-management-component';
       <!-- Grid de platos -->
       <div *ngIf="!loading && filteredDishes.length > 0" class="products-grid">
         <div *ngFor="let dish of filteredDishes" class="product-card">
-          <!-- Imagen del plato -->
+          <!-- Imagen del plato - COMENTADA por eliminar funcionalidad de imagen -->
+          <!--
           <div class="product-image">
             <img [src]="getImageUrl(dish.imageUrl)" 
                  [alt]="dish.name"
                  onerror="this.src='assets/default-dish.svg'">
             <div class="image-overlay"></div>
           </div>
+          -->
 
           <!-- Contenido del plato -->
           <div class="product-info">
@@ -209,12 +211,14 @@ import { Dish } from '../dish-management-component/dish-management-component';
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       position: relative;
+      border-top: 4px solid #e67e22;
     }
     .product-card:hover { 
       transform: translateY(-8px); 
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
     
+    /* Estilos para imágenes - COMENTADOS para eliminar funcionalidad
     .product-image { 
       height: 220px; overflow: hidden; position: relative;
     }
@@ -227,6 +231,7 @@ import { Dish } from '../dish-management-component/dish-management-component';
       position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.1));
     }
+    */
     
     .product-info { padding: 24px; }
     .product-name { 

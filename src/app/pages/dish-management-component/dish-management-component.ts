@@ -8,8 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DishEditDialogComponent } from './dish-edit-dialog/dish-edit-dialog.component';
-// import { DishBackendService } from '../../services/dish-backend-service'; // ✅ DESCOMENTA CUANDO TENGAS TU BACKEND
+import { DishBackendService } from '../../services/dish-backend-service'; // ✅ BACKEND ACTIVADO
 
 export interface Dish {
   id: number;
@@ -33,7 +34,8 @@ export interface Dish {
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   templateUrl: './dish-management-component.html',
   styleUrl: './dish-management-component.css'
@@ -103,8 +105,9 @@ export class DishManagementComponent implements OnInit {
   searchTerm = '';
 
   constructor(
-    private dialog: MatDialog
-    // private dishBackendService: DishBackendService // ✅ DESCOMENTA CUANDO TENGAS TU BACKEND
+    private dialog: MatDialog,
+    private dishBackendService: DishBackendService, // ✅ BACKEND ACTIVADO
+    private http: HttpClient // ✅ PARA CONEXIÓN DIRECTA AL BACKEND
   ) {}
 
   ngOnInit() {
@@ -113,21 +116,8 @@ export class DishManagementComponent implements OnInit {
   }
 
   loadDishes() {
-    // ✅ MÉTODO PARA TU BACKEND - Descomenta cuando esté listo
-    /*
-    this.dishBackendService.getAllDishes().subscribe({
-      next: (dishes) => {
-        this.dishes = dishes;
-        this.filterDishes();
-      },
-      error: (error) => {
-        console.error('Error cargando platos desde backend:', error);
-        this.loadDishesFromLocalStorage(); // Fallback a localStorage
-      }
-    });
-    */
-    
-    // 🔄 FUNCIONAMIENTO ACTUAL - Solo localStorage
+    // 🔄 FUNCIONAMIENTO ACTUAL - Solo localStorage con imágenes
+    console.log('Cargando platos desde localStorage...');
     this.loadDishesFromLocalStorage();
   }
 
@@ -135,6 +125,9 @@ export class DishManagementComponent implements OnInit {
     const storedDishes = localStorage.getItem('dishes');
     if (storedDishes) {
       this.dishes = JSON.parse(storedDishes);
+      console.log('📂 Platos cargados desde localStorage:', this.dishes);
+    } else {
+      console.log('📂 No hay platos guardados en localStorage');
     }
     this.filterDishes();
   }
@@ -168,29 +161,30 @@ export class DishManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('🔍 Diálogo cerrado con resultado:', result);
+      
       if (result) {
-        // ✅ MÉTODO PARA TU BACKEND - Descomenta cuando esté listo
-        /*
-        this.dishBackendService.createDish(result).subscribe({
-          next: (newDish) => {
-            this.dishes.push(newDish);
-            this.filterDishes();
-            console.log('Plato creado exitosamente:', newDish);
-          },
-          error: (error) => {
-            console.error('Error creando plato:', error);
-            alert('Error al crear el plato. Intenta nuevamente.');
-          }
-        });
-        */
-
-        // 🔄 FUNCIONAMIENTO ACTUAL - Solo localStorage
-        const newId = Math.max(...this.dishes.map(d => d.id), 0) + 1;
-        const newDish: Dish = { ...result, id: newId };
+        console.log('✅ Plato recibido del diálogo:', result);
+        
+        // Agregar el nuevo plato a la lista local inmediatamente
+        const newId = result.id || Math.max(...this.dishes.map(d => d.id), 0) + 1;
+        const newDish: Dish = { 
+          ...result, 
+          id: newId
+        };
+        
+        console.log('🆔 ID asignado:', newId);
+        
+        // Agregar a la lista y actualizar
         this.dishes.push(newDish);
         this.saveDishes();
         this.filterDishes();
-        console.log('Plato agregado localmente - Listo para backend:', newDish);
+        
+        console.log('✅ Plato agregado a la lista:', newDish);
+        console.log('📊 Total platos ahora:', this.dishes.length);
+        console.log('📋 Lista completa de platos:', this.dishes);
+      } else {
+        console.log('❌ Diálogo cerrado sin resultado');
       }
     });
   }
@@ -269,12 +263,15 @@ export class DishManagementComponent implements OnInit {
     this.saveDishes();
   }
 
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  /*
   getImageUrl(imageUrl: string): string {
     if (imageUrl.startsWith('http')) {
       return imageUrl;
     }
     return `assets/${imageUrl}`;
   }
+  */
 
   getCategoryIcon(category: string): string {
     const iconMap: { [key: string]: string } = {
@@ -286,4 +283,12 @@ export class DishManagementComponent implements OnInit {
     };
     return iconMap[category] || 'fastfood';
   }
+
+  // TEMPORALMENTE COMENTADO - para versión sin imágenes
+  /*
+  // Método para obtener imagen (simplificado sin localStorage)
+  getImageUrl(dish: Dish): string {
+    return dish.imageUrl || 'assets/default-dish.jpg';
+  }
+  */
 }
